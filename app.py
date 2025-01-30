@@ -2,7 +2,7 @@ import tkinter
 from tkinter import Tk, StringVar  # Menu
 from tkinter.ttk import Frame, Separator, Label, Radiobutton, Button, Combobox
 
-import commands as fc
+import commands as com
 from styles import configure_styles, color_background_dark
 
 
@@ -42,9 +42,9 @@ class App(Tk):
         menu_frame = Frame(self)
         menu_frame.grid(row=0, columnspan=3, sticky='nsew')
 
-        Button(menu_frame, text='Creators', command=lambda: fc.show_creators(self)).pack(side='left',
-                                                                                         padx=(4, 0),
-                                                                                         pady=4)
+        Button(menu_frame, text='Creators', command=lambda: com.show_creators(self)).pack(side='left',
+                                                                                          padx=(4, 0),
+                                                                                          pady=4)
         # Can add more buttons - simply copy above and change text and command
 
         year_frame = Frame(self, padding=(10, 10))
@@ -86,7 +86,7 @@ class App(Tk):
         genre_combo.set(options_genre[0])
 
         Button(self, text='Recommend a movie',
-               command=lambda: fc.btn_start_pressed(
+               command=lambda: com.btn_start_pressed(
                    self, movies, year.get(), runtime.get(), imdb.get(), genre_combo.get())
                ).grid(row=3, column=1)
 

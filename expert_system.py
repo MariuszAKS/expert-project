@@ -97,6 +97,10 @@ class MovieRecommender(KnowledgeEngine):
         movie_score, index = self.calculate_movie_score(title, 'average', 'old', 'short')
         self.update_best_movies(movie_score, index)
 
+    def reset_best_movies(self):
+        self.best_movie_index = [-1, -1, -1]
+        self.best_movie_score = [0, 0, 0]
+
     def declare_preferences(self, movie_year, movie_runtime, movie_imdb, movie_genre):
         self.declare(Fact(imdb_rating=movie_imdb))
         self.declare(Fact(release_year=movie_year))
@@ -165,10 +169,8 @@ def declare_movies_from_data():
 
 
 def run_engine(movie_year, movie_runtime, movie_imdb, movie_genre):
-    global engine
-
-    engine = MovieRecommender()
     engine.reset()
+    engine.reset_best_movies()
 
     declare_movies_from_data()
     engine.declare_preferences(movie_year, movie_runtime, movie_imdb, movie_genre)
