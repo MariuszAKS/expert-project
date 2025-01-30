@@ -1,12 +1,11 @@
 from tkinter import Toplevel
 from tkinter.ttk import Frame, Separator, Label
+from expert_system import run_engine
 
 
 def show_creators(main_window):
     window = Toplevel(main_window)
     window.title('Creators')
-
-    window.grab_set()
 
     frame = Frame(window, padding=(10, 10))
     frame.pack()
@@ -25,7 +24,14 @@ def show_creators(main_window):
 
     Separator(frame, orient='horizontal').pack(fill='x')
 
+    window.grab_set()
 
-def btn_start_pressed(year, runtime, imdb, genre):
-    print('Button pressed here run logic')
-    print('Selected movie:', year, runtime, imdb, genre)
+
+def btn_start_pressed(window, movies, year, runtime, imdb, genre):
+    movie_titles = run_engine(year, runtime, imdb, genre)
+
+    for i in range(len(movies)):
+        movies[i].set('-')
+
+    for i in range(min(len(movie_titles), len(movies))):
+        movies[i].set(movie_titles[i])
