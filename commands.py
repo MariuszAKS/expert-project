@@ -27,11 +27,15 @@ def show_creators(main_window):
     window.grab_set()
 
 
-def btn_start_pressed(window, movies, year, runtime, imdb, genre):
-    movie_titles = run_engine(year, runtime, imdb, genre)
+def btn_start_pressed(runtimes, titles, years, year, runtime, imdb, genre):
+    movie_runtimes, movie_titles, movie_years = run_engine(year, runtime, imdb, genre)
 
-    for i in range(len(movies)):
-        movies[i].set('-')
+    for i in range(3):
+        runtimes[i].set('-')
+        titles[i].set('-')
+        years[i].set('-')
 
-    for i in range(min(len(movie_titles), len(movies))):
-        movies[i].set(movie_titles[i])
+    for i in range(min(len(movie_titles), len(movie_titles))):
+        runtimes[i].set(movie_runtimes[i])
+        titles[i].set(movie_titles[i])
+        years[i].set(movie_years[i])

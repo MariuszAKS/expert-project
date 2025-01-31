@@ -14,6 +14,11 @@ def configure_styles():
                     relief='raised',
                     borderwidth=2)
 
+    style.configure('Borderless.TFrame',
+                    background=color_background_light,
+                    relief='flat',
+                    borderwidth=0)
+
     style.configure('TLabel',
                     background=color_background_light,
                     foreground=color_font,

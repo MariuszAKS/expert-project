@@ -177,16 +177,17 @@ def run_engine(movie_year, movie_runtime, movie_imdb, movie_genre):
 
     engine.run()
 
+    movie_runtimes = []
     movie_titles = []
+    movie_years = []
 
-    if engine.best_movie_index[0] > -1:
-        movie_titles.append(data.loc[engine.best_movie_index[0], 'Series_Title'])
-    if engine.best_movie_index[1] > -1:
-        movie_titles.append(data.loc[engine.best_movie_index[1], 'Series_Title'])
-    if engine.best_movie_index[2] > -1:
-        movie_titles.append(data.loc[engine.best_movie_index[2], 'Series_Title'])
+    for i in range(3):
+        if engine.best_movie_index[i] > -1:
+            movie_runtimes.append(data.loc[engine.best_movie_index[i], 'Runtime'])
+            movie_titles.append(data.loc[engine.best_movie_index[i], 'Series_Title'])
+            movie_years.append(data.loc[engine.best_movie_index[i], 'Released_Year'])
 
-    return movie_titles
+    return movie_runtimes, movie_titles, movie_years
 
 
 # Read data from file
@@ -212,10 +213,6 @@ runtime['short'] = trimf(runtime.universe, [0, 0, 100])
 runtime['average'] = trimf(runtime.universe, [50, 100, 150])
 runtime['long'] = trimf(runtime.universe, [100, 200, 200])
 
-
-# for testing use top 100 rows
-# first_100_rows_testing = data.head(10)
-# test = first_100_rows_testing.loc[first_100_rows_testing['Series_Title'] == 'Inception']['Runtime'].iloc[0][:-4]
 
 # Initialize the engine
 engine = MovieRecommender()
